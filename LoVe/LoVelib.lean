@@ -156,7 +156,7 @@ instance Set.PartialOrder {α : Type} : PartialOrder (Set α) :=
         intro A B
         apply Iff.intro
         { intro hAB
-          simp [LT.lt, LE.le] at *
+          simp at *
           cases hAB with
           | intro hsseq hneq =>
             apply And.intro
@@ -166,7 +166,7 @@ instance Set.PartialOrder {α : Type} : PartialOrder (Set α) :=
               apply Set.ext
               aesop } }
         { intro hAB
-          simp [LT.lt, LE.le] at *
+          simp at *
           aesop },
     le_antisymm      :=
       by

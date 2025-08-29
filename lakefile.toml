@@ -19,5 +19,10 @@ name = "autograder"
 git = "https://github.com/robertylewis/lean4-autograder-main" 
 rev = "fbc7a9b86a35d5462008ca9c0a6e0ef414d58574"
 
+[[require]]
+name = "mdgen"
+git = "https://github.com/Seasawher/mdgen"
+rev = "529275f8325099464d0a8493fa699c165bdb5141"
+
 [[lean_lib]]
 name = "LoVe"
