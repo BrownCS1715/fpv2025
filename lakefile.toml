@@ -22,6 +22,7 @@ rev = "fbc7a9b86a35d5462008ca9c0a6e0ef414d58574"
 [[require]]
 name = "mdgen"
 git = "https://github.com/Seasawher/mdgen"
+rev = "lean/v4.21.0"
 
 [[lean_lib]]
 name = "LoVe"
