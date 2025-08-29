@@ -1,0 +1,23 @@
+name = "LoVe"
+defaultTargets = ["LoVe"]
+
+[leanOptions]
+autoImplicit = false
+linter.unusedVariables = false 
+
+[moreServerOptions]
+linter.unusedTactic = false
+linter.unreachableTactic = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "79e94a093aff4a60fb1b1f92d9681e407124c2ca"
+
+[[require]]
+name = "autograder" 
+git = "https://github.com/robertylewis/lean4-autograder-main" 
+rev = "fbc7a9b86a35d5462008ca9c0a6e0ef414d58574"
+
+[[lean_lib]]
+name = "LoVe"
