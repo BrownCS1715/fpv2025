@@ -15,7 +15,7 @@ jobs:
 
       - name: Generate markdown files
         run: |
-          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:v4.10.0
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain leanprover/lean4:v4.22.0
           ~/.elan/bin/lake update mdgen
           ~/.elan/bin/lake build mdgen
           ~/.elan/bin/lake exe mdgen LoVe markdown
