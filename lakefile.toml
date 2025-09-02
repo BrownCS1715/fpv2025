@@ -4,8 +4,6 @@ defaultTargets = ["LoVe"]
 [leanOptions]
 autoImplicit = false
 linter.unusedVariables = false 
-
-[moreServerOptions]
 linter.unusedTactic = false
 linter.unreachableTactic = false
 
