@@ -1,6 +1,6 @@
 # Brown CS 1715: Formal Proof and Verification, 2025
 
-In this repository, you'll find Lean files for [CS1715](https://browncs1951x.github.io/).
+In this repository, you'll find Lean files for [CS1715](https://browncs1715.github.io/).
 
 ## Using this repository
 
@@ -14,7 +14,7 @@ We assume that you have installed:
 - `lean` (via `elan`)
 - VSCode and the Lean extension
 
-following our [course setup instructions](https://browncs1951x.github.io/setup.html).
+following our [course setup instructions](https://browncs1715.github.io/setup.html).
 
 To set up this project, run:
 

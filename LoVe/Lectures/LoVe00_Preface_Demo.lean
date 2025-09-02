@@ -83,11 +83,11 @@ Strengths:
 
 ### Web Site
 
-    https://BrownCS1951x.github.io
+    https://BrownCS1715.github.io
 
 ### Repository (Demos, Exercises, Homework)
 
-    https://github.com/BrownCS1951x/fpv2024
+    https://github.com/BrownCS1715/fpv2024
 
 The file you are currently looking at is a demo.
 For each chapter of the Hitchhiker's Guide, there will be approximately
@@ -103,7 +103,7 @@ one demo, one exercise sheet, and one homework.
 
 ### The Hitchhiker's Guide to Logical Verification
 
-    https://cs.brown.edu/courses/cs1951x/static_files/main.pdf
+    https://cs.brown.edu/courses/cs1715/static_files/main.pdf
 
 The lecture notes consist of a preface and 14 chapters. They cover the same
 material as the corresponding lectures but with more details. Sometimes there

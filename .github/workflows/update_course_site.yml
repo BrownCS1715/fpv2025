@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --global user.name "GitHub Bot"
           git config --global user.email "bot@example.com"
-          git clone git@github.com:BrownCS1951x/BrownCS1951x.github.io.git site
+          git clone git@github.com:BrownCS1715/web site
 
       - name: Add markdown files to course site
         run: |
