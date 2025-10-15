@@ -455,6 +455,9 @@ theorem sillyLoop_from_1_SmallStep :
   (Stmt.skip, (fun _ ↦ 0)) :=
   by
     rw [sillyLoop]
+    -- iterate 2 (constructor <;> try simp)
+
+
     apply RTC.head
     { apply SmallStep.whileDo }
     { apply RTC.head
@@ -506,9 +509,13 @@ theorem SmallStep_final (S s) :
       cases hstep
     | assign x a =>
       simp
-      apply Exists.intro Stmt.skip
-      apply Exists.intro (s[x ↦ a s])
-      apply SmallStep.assign
+      refine ⟨_, _, SmallStep.assign ..⟩
+      -- existsi ?_, ?_
+      -- rotate_left 2
+      -- apply SmallStep.assign
+      -- apply Exists.intro Stmt.skip
+      -- apply Exists.intro (s[x ↦ a s])
+      -- apply SmallStep.assign
     | seq S T ihS ihT =>
       simp
       by_cases h : S = Stmt.skip
@@ -767,6 +774,46 @@ lemma parStepDiamond {i j Ss Ts Ts' s t t'}
             parStep i (Ts', t') (Us, u) :=
 sorry
 
+
 /- Can we prove it? Can we fix it? -/
+
+
+
+
+/-- Returns the set of variables written to by a program -/
+def Stmt.W : Stmt → Set String
+| skip => ∅
+| whileDo _ S => S.W
+| ifThenElse _ T E => T.W ∪ E.W
+| seq S T => S.W ∪ T.W
+| assign x _ => {x}
+
+/-- Returns the set of variables read by a boolean or arithmetic expression -/
+def exp.R {α : Type} (f : State → α) : Set String :=
+{ x | ∃ s n, f (s[x ↦ n]) ≠ f s}
+
+/-- Returns the set of variables read by a program -/
+def Stmt.R : Stmt → Set String
+| skip => ∅
+| whileDo b S => exp.R b ∪ S.R
+| ifThenElse b T E => exp.R b ∪ T.R ∪ E.R
+| seq S T => S.R ∪ T.R
+| assign _ a => exp.R a
+
+/-- Returns the set of variables written to or read by a program -/
+def Stmt.V (S : Stmt) : Set String := S.W ∪ S.R
+
+
+lemma parStepDiamondFixed {i j Ss Ts Ts' s t t'}
+  (hi : i < Ss.length)
+  (hj : j < Ts.length)
+  (hij : i ≠ j)
+  (hT : parStep i (Ss, s) (Ts, t))
+  (hT' : parStep j (Ss, s) (Ts', t'))
+  (hWV : (Ss.get ⟨i, hi⟩).W ∩ (Ts.get ⟨j, hj⟩).V = ∅)
+  (hVW : (Ss.get ⟨i, hi⟩).V ∩ (Ts.get ⟨j, hj⟩).W = ∅) :
+    ∃ u Us, parStep j (Ts, t) (Us, u) ∧
+            parStep i (Ts', t') (Us, u) :=
+sorry
 
 end LoVe
