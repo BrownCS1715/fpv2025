@@ -255,6 +255,9 @@ theorem BigStep_terminates {S s} :
 :=
   sorry   -- unprovable
 
+
+
+
 /- We can define inversion rules about the big-step semantics: -/
 
 @[simp] theorem BigStep_skip_Iff {s t} :
@@ -508,14 +511,12 @@ theorem SmallStep_final (S s) :
       apply SmallStep.assign
     | seq S T ihS ihT =>
       simp
-      cases Classical.em (S = Stmt.skip) with
-      | inl h =>
-        rw [h]
+      by_cases h : S = Stmt.skip
+      . rw [h]
         apply Exists.intro T
         apply Exists.intro s
         apply SmallStep.seq_skip
-      | inr h =>
-        simp [h] at ihS
+      . simp [h] at ihS
         cases ihS with
         | intro S' hS₀ =>
           cases hS₀ with
@@ -526,14 +527,12 @@ theorem SmallStep_final (S s) :
             assumption
     | ifThenElse B S T ihS ihT =>
       simp
-      cases Classical.em (B s) with
-      | inl h =>
-        apply Exists.intro S
+      by_cases h : B s
+      . apply Exists.intro S
         apply Exists.intro s
         apply SmallStep.if_true
         assumption
-      | inr h =>
-        apply Exists.intro T
+      . apply Exists.intro T
         apply Exists.intro s
         apply SmallStep.if_false
         assumption
@@ -750,10 +749,12 @@ of `WHILE` programs on a single state. -/
 inductive parStep : ℕ → (List Stmt × State) → (List Stmt × State) → Prop
 | intro {Ss Ss' P P' st st' i}
   (hi : i < Ss.length)
-  (hs : (P, st) ⇒ (P', st')): 
+  (hiS : P = Ss.get ⟨i, hi⟩)
+  (hs : (P, st) ⇒ (P', st'))
+  (hS' : Ss' = Ss.set i P') :
     parStep i (Ss, st) (Ss', st')
 
-/- There's a diamond property we'd like to be true. 
+/- There's a diamond property we'd like to be true.
 What does this mean? -/
 
 lemma parStepDiamond {i j Ss Ts Ts' s t t'}
@@ -762,7 +763,7 @@ lemma parStepDiamond {i j Ss Ts Ts' s t t'}
   (hij : i ≠ j)
   (hT : parStep i (Ss, s) (Ts, t))
   (hT' : parStep j (Ss, s) (Ts', (t'))) :
-    ∃ u Us, parStep j (Ts, t) (Us, u) ∧ 
+    ∃ u Us, parStep j (Ts, t) (Us, u) ∧
             parStep i (Ts', t') (Us, u) :=
 sorry
 
