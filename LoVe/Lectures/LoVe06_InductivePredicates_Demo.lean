@@ -29,16 +29,6 @@ In Lean, we can define the corresponding "is even" predicate as follows: -/
 inductive Even : ℕ → Prop where
   | zero    : Even 0
   | add_two : ∀k : ℕ, Even k → Even (k + 2)
-  -- | four : Even 4
-
-#check (Even.add_two _ (Even.add_two _ Even.zero) : Even 4)
-
-#check proof_irrel
-
-
-inductive Evens : Type
-| mk (k : ℕ) : Even k → Evens
-
 
 /- This should look familiar. We have used the same syntax, except with `Type`
 instead of `Prop`, for inductive types.
@@ -61,10 +51,6 @@ def evenRec : ℕ → Bool
   | 0     => true
   | 1     => false
   | k + 2 => evenRec k
-
-
-#eval evenRec 4
--- #eval Even 4
 
 /- There are advantages and disadvantages to both styles.
 
@@ -126,9 +112,8 @@ We can ask, and formally answer, questions such as: Can the score ever return to
 `0–0`? -/
 
 theorem no_Step_to_0_0 (s : Score) :
-  ¬ s ↝ 0–0 := fun h => nomatch h
-
-#print no_Step_to_0_0
+  ¬ s ↝ 0–0 :=
+  sorry
 
 /- ### Reflexive Transitive Closure
 
@@ -151,31 +136,18 @@ def starRec {α : Type} (R : α → α → Bool) :
   α → α → Bool :=
   sorry
 
-inductive P : ℕ → Prop
-| ofSucc : ∀ n, P (n+1) → P n
-
-example : ∀ n, ¬ P n := by
-  intro n
-  intro hn
-  induction hn with
-  | ofSucc a ha ih =>
-    exact ih
-
-
--- example : Star Step (0–0) Score.gameServ :=
---   Star.trans (0–0) (15–0) Score.gameServ (Star.base _ _ (by constructor)) <|
---     Star.trans (15–0) (30–0) Score.gameServ (Star.base _ _ (by constructor))
---       _
-
+example : Star Step (0–0) Score.gameServ := 
+  sorry
 
 /- ### A Nonexample
 
 Not all inductive definitions are legal. -/
 
 -- fails
-
--- inductive Illegal : Prop where
---   | intro : ¬ Illegal → Illegal
+/-
+inductive Illegal : Prop where
+  | intro : ¬ Illegal → Illegal
+-/
 
 /- ## Logical Symbols
 
@@ -230,15 +202,14 @@ This is called __rule induction__, because the induction is on the introduction
 rules (i.e., the constructors of the proof term). Thanks to the PAT principle,
 this works as expected. -/
 
--- theorem mod_two_Eq_zero_of_Even (n : ℕ) (h : Even n) :
---   n % 2 = 0 := by
---     induction h
-
+theorem mod_two_Eq_zero_of_Even (n : ℕ) (h : Even n) :
+  n % 2 = 0 :=
+  sorry
 
 theorem Not_Even_two_mul_add_one (m n : ℕ)
     (hm : m = 2 * n + 1) :
   ¬ Even m :=
-  sorry
+  sorry 
 
 /- `linarith` proves goals involving linear arithmetic equalities or
 inequalities. "Linear" means it works only with `+` and `-`, not `*` and `/`
@@ -250,9 +221,8 @@ theorem linarith_example (i : Int) (hi : i > 5) :
 
 theorem Star_Star_Iff_Star {α : Type} (R : α → α → Prop)
     (a b : α) :
-  Star (Star R) a b ↔ Star R a b := by
-    sorry
-
+  Star (Star R) a b ↔ Star R a b :=
+  sorry
 
 @[simp] theorem Star_Star_Eq_Star {α : Type}
     (R : α → α → Prop) :
