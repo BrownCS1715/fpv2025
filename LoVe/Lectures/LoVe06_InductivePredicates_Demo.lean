@@ -32,15 +32,13 @@ inductive Even : ℕ → Prop where
   -- | four : Even 4
 
 #check (Even.add_two _ (Even.add_two _ Even.zero) : Even 4)
-#check Even.four
+
 #check proof_irrel
-example : Even.add_two _ (Even.add_two _ Even.zero) = Even.four := rfl
+
 
 inductive Evens : Type
 | mk (k : ℕ) : Even k → Evens
 
-def four_1 : Evens := .mk 4 (Even.add_two _ (Even.add_two _ Even.zero) : Even 4)
-def four_2 : Evens := .mk 4 .four
 
 /- This should look familiar. We have used the same syntax, except with `Type`
 instead of `Prop`, for inductive types.
@@ -66,7 +64,7 @@ def evenRec : ℕ → Bool
 
 
 #eval evenRec 4
-#eval Even 4
+-- #eval Even 4
 
 /- There are advantages and disadvantages to both styles.
 
@@ -164,10 +162,10 @@ example : ∀ n, ¬ P n := by
     exact ih
 
 
-example : Star Step (0–0) Score.gameServ :=
-  Star.trans (0–0) (15–0) Score.gameServ (Star.base _ _ (by constructor)) <|
-    Star.trans (15–0) (30–0) Score.gameServ (Star.base _ _ (by constructor))
-      _
+-- example : Star Step (0–0) Score.gameServ :=
+--   Star.trans (0–0) (15–0) Score.gameServ (Star.base _ _ (by constructor)) <|
+--     Star.trans (15–0) (30–0) Score.gameServ (Star.base _ _ (by constructor))
+--       _
 
 
 /- ### A Nonexample
@@ -232,9 +230,9 @@ This is called __rule induction__, because the induction is on the introduction
 rules (i.e., the constructors of the proof term). Thanks to the PAT principle,
 this works as expected. -/
 
-theorem mod_two_Eq_zero_of_Even (n : ℕ) (h : Even n) :
-  n % 2 = 0 := by
-    induction h
+-- theorem mod_two_Eq_zero_of_Even (n : ℕ) (h : Even n) :
+--   n % 2 = 0 := by
+--     induction h
 
 
 theorem Not_Even_two_mul_add_one (m n : ℕ)
@@ -253,9 +251,7 @@ theorem linarith_example (i : Int) (hi : i > 5) :
 theorem Star_Star_Iff_Star {α : Type} (R : α → α → Prop)
     (a b : α) :
   Star (Star R) a b ↔ Star R a b := by
-    apply Iff.intro
-    . intro h
-      induction h
+    sorry
 
 
 @[simp] theorem Star_Star_Eq_Star {α : Type}
