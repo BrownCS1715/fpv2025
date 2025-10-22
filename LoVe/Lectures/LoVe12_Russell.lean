@@ -1,3 +1,5 @@
+import LoVe.LoVelib
+
 /- ## Russell's Paradox in Type Theory
 
 This section draws in part on Ulrik Buchholtz's presentation of this material:
@@ -21,7 +23,7 @@ large elimination. After seeing how the proof goes, you might think about why
 this is the case!)
 
 First, recall that `Empty` is a type with no terms, defined as:
-  
+
   inductive Empty : Type
 
 It is the `Type` analogue of `False : Prop`.
