@@ -42,11 +42,37 @@ example (k : Nat) (h1 : 1 ≤ k) (h2 : k ≤ 4) : k ∣ 12 := by
 Exercise: Write code which does the same thing without using the `interval_cases` tactic.
 -/
 
+theorem eq_or_succ_le_of_le {k l : Nat} (h : k ≤ l) : k = l ∨ k + 1 ≤ l :=
+  Nat.eq_or_lt_of_le h
+
 example (k : Nat) (h1 : 1 ≤ k) (h2 : k ≤ 4) : k ∣ 12 := by
-  sorry
-
-
-
+  have h2o : 1 = k ∨ 2 ≤ k := eq_or_succ_le_of_le h1
+  apply Or.elim h2o
+  . intro hk
+    subst hk
+    decide
+  . intro h3
+    have h3o : 2 = k ∨ 3 ≤ k := eq_or_succ_le_of_le h3
+    apply Or.elim h3o
+    . intro hk
+      subst hk
+      decide
+    . intro h4
+      have h4o : 3 = k ∨ 4 ≤ k := eq_or_succ_le_of_le h4
+      apply Or.elim h4o
+      . intro hk
+        subst hk
+        decide
+      . intro h5
+        have h5o : 4 = k ∨ 5 ≤ k := eq_or_succ_le_of_le h5
+        apply Or.elim h5o
+        . intro hk
+          subst hk
+          decide
+        . intro h6
+          have hnot : ¬ 5 ≤ 4 := by decide
+          have hpos : 5 ≤ 4 := Nat.le_trans h6 h2
+          exact absurd hpos hnot
 
 
 
