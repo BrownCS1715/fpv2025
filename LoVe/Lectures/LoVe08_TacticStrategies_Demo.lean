@@ -215,7 +215,7 @@ and prove that it's correct with respect to an interpretation function.
 
 
 This is probably doable! But executing our decision procedure would happen
-in Lean's (slow, reliable) kernel. All numeric arithmetic would be done in unary.
+in Lean's (slow, reliable) kernel.
 
 
 ### "Prove-as-we-go"
